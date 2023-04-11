@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Server</title>
+    <style>
+        body {
+            margin: 40px auto;
+            max-width: 650px;
+            line-height: 1.6;
+            font-size: 18px;
+            font-family: "Courier New", Courier, monospace;
+            color: #444;
+            padding: 0 10px;
+        }
+
+        h2 {
+            line-height: 1.2;
+        }
+
+        #videoPlayer {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <h2>HTTP Video Streaming</h2>
+    <p>This video is 61MB and is being streamed instead of downloaded.</p>
+    <p>
+        Feel free to seek through the video and it only loads the part you want to
+        watch
+    </p> -->
+    <video autoplay controls muted id="videoPlayer">
+        <source src="http://localhost:8092/video" type="video/mp4" />
+    </video>
+    <!-- <i>Big Buck Bunny</i> -->
+    <script type='text/javascript'>
+        let videoId = 0
+        console.log('video streaming start')
+        let video = document.getElementById('videoPlayer')
+        video.addEventListener('ended', myHandler, false);
+        function myHandler(e) {
+            console.log('video end')
+            video.src = `http://localhost:8092/video?id=${videoId}`
+            if (videoId >= 3)
+                videoId = 0
+            else
+                videoId += 1
+            video.load()
+            video.play()
+        }
+    </script>
+</body>
+
+</html>
