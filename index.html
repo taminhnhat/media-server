@@ -39,17 +39,17 @@
         watch
     </p> -->
     <video autoplay muted id="videoPlayer">
-        <source src="http://localhost:8092/video" type="video/mp4" />
+        <source src="http://192.168.1.42:8092/video" type="video/mp4" />
     </video>
     <!-- <i>Big Buck Bunny</i> -->
     <script type='text/javascript'>
         let videoId = 1
         console.log('video streaming start')
         let video = document.getElementById('videoPlayer')
-        video.addEventListener('ended', myHandler, false);
+        video.addEventListener('ended', myHandler, false)
         function myHandler(e) {
             console.log('video end')
-            video.src = `http://localhost:8092/video?id=${videoId}`
+            video.src = `http://192.168.1.42:8092/video?id=${videoId}`
             if (videoId >= 3)
                 videoId = 0
             else
